@@ -16,3 +16,7 @@ body,
   align-items: center;
   justify-content: center;
 }
+
+.nav-links a {
+  margin: 5px;
+}
