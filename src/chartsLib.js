@@ -11,9 +11,14 @@ export const renderQueuChart = () => {
   const yScale = d3
     .scaleLinear()
     .domain([0, 30])
+    .range([0, chartHeight - margins.top]);
+
+  const yAxisScale = d3
+    .scaleLinear()
+    .domain([0, 30])
     .range([chartHeight - margins.top, 0]);
 
-  const yAxis = d3.axisLeft(yScale);
+  const yAxis = d3.axisLeft(yAxisScale);
 
   const xScale = d3
     .scaleLinear()
@@ -29,7 +34,7 @@ export const renderQueuChart = () => {
     },
     {
       company: "ALPS/Dorsey Wright Sector Momentum ETF",
-      daysOnQueu: 26
+      daysOnQueu: 30
     },
     {
       company: "Lindblad Expeditions Holdings Inc. ",
@@ -53,7 +58,7 @@ export const renderQueuChart = () => {
     },
     {
       company: "Everest Re Group, Ltd.",
-      daysOnQueu: 27
+      daysOnQueu: 35
     },
     {
       company: "Resource Capital Corp.",
@@ -84,17 +89,39 @@ export const renderQueuChart = () => {
     .attr("transform", `translate(${margins.left}, ${chartHeight})`)
     .call(xAxis);
 
-  const rectWidth = 20;
+  const rectWidth = 35;
 
   chart
     .selectAll("rect")
-    .data(_.sortBy(data, d => d.daysOnQueu))
+    .data(_.reverse(_.sortBy(data, d => d.daysOnQueu)))
     .enter()
     .append("rect")
-    .attr("x", (d, i) => xScale(i) + rectWidth + chartWidth / 10)
+    .classed("danger", d => d.daysOnQueu >= 30)
+    .classed("alert", d => _.inRange(d.daysOnQueu, 24, 30))
+    .attr("transform", `translate(${margins.left}, 0)`)
+    .attr("x", (d, i) => (i + 1) * chartWidth / 10 - rectWidth / 2)
     .attr("y", d => {
       return chartHeight - yScale(d.daysOnQueu);
     })
+    .attr("val", d => d.daysOnQueu)
     .attr("width", rectWidth)
     .attr("height", d => yScale(d.daysOnQueu));
+
+  chart
+    .append("line")
+    .attr("x1", 0)
+    .attr("y1", yAxisScale(24) + margins.top)
+    .attr("x2", chartWidth)
+    .attr("y2", yAxisScale(24) + margins.top)
+    .attr("transform", `translate(${margins.left}, 0)`)
+    .classed("threshold-line alert-line", true);
+
+  chart
+    .append("line")
+    .attr("x1", 0)
+    .attr("y1", margins.top)
+    .attr("x2", chartWidth)
+    .attr("y2", margins.top)
+    .attr("transform", `translate(${margins.left}, 0)`)
+    .classed("threshold-line danger-line", true);
 };
