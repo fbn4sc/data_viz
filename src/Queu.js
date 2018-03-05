@@ -10,7 +10,7 @@ class Queu extends Component {
     return (
       <div className="container">
         <h1>Queu</h1>
-        <div id="svg" className="container" />
+        <div id="chart-container" className="container" />
       </div>
     );
   }
