@@ -11,12 +11,21 @@ body,
   height: 100%;
 }
 
-.container {
+.container,
+.nav-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.container {
+  flex-flow: column;
+}
+
 .nav-links a {
   margin: 5px;
+}
+
+svg {
+  background-color: lightgray;
 }

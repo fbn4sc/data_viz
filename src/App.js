@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div className="container nav-links">
+          <div className="nav-container nav-links">
             <Link to="/">Home</Link>
             <Link to="/queu">Queu</Link>
             <Link to="/churn">Churn</Link>

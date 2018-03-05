@@ -1,11 +1,19 @@
-import React from "react";
+import React, { Component } from "react";
+import { renderQueuChart } from "./chartsLib";
 
-const Queu = () => {
-  return (
-    <div className="container">
-      <h1>Queu</h1>
-    </div>
-  );
-};
+class Queu extends Component {
+  componentDidMount() {
+    renderQueuChart();
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <h1>Queu</h1>
+        <div id="svg" className="container" />
+      </div>
+    );
+  }
+}
 
 export default Queu;
