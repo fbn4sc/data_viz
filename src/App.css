@@ -66,3 +66,19 @@ rect {
 .danger-text {
   fill: rgba(217, 83, 79, 1);
 }
+
+.container-alert svg {
+  animation: dangerContainerBackground 2s infinite;
+}
+
+@keyframes dangerContainerBackground {
+  0% {
+    background: white;
+  }
+  50% {
+    background: rgba(217, 83, 79, 0.1);
+  }
+  100% {
+    background: white;
+  }
+}

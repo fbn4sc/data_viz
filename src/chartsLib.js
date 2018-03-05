@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import * as _ from "lodash";
 
-export const renderQueuChart = () => {
+export const renderQueuChart = data => {
   const margins = { top: 20, right: 30, bottom: 20, left: 30 };
   const width = 600;
   const height = 400;
@@ -26,49 +26,6 @@ export const renderQueuChart = () => {
     .range([0, chartWidth]);
 
   const xAxis = d3.axisBottom(xScale);
-
-  const data = [
-    {
-      company: "Ingersoll-Rand plc (Ireland)",
-      daysOnQueu: 3
-    },
-    {
-      company: "ALPS/Dorsey Wright Sector Momentum ETF",
-      daysOnQueu: 30
-    },
-    {
-      company: "Lindblad Expeditions Holdings Inc. ",
-      daysOnQueu: 22
-    },
-    {
-      company: "Zogenix, Inc.",
-      daysOnQueu: 6
-    },
-    {
-      company: "Kennedy-Wilson Holdings Inc.",
-      daysOnQueu: 25
-    },
-    {
-      company: "SunTrust Banks, Inc.",
-      daysOnQueu: 21
-    },
-    {
-      company: "First Trust RiverFront Dynamic Europe ETF",
-      daysOnQueu: 27
-    },
-    {
-      company: "Everest Re Group, Ltd.",
-      daysOnQueu: 35
-    },
-    {
-      company: "Resource Capital Corp.",
-      daysOnQueu: 7
-    },
-    {
-      company: "Cushing Renaissance Fund (The)",
-      daysOnQueu: 15
-    }
-  ];
 
   d3
     .select("#chart-container")
