@@ -124,4 +124,18 @@ export const renderQueuChart = () => {
     .attr("y2", margins.top)
     .attr("transform", `translate(${margins.left}, 0)`)
     .classed("threshold-line danger-line", true);
+
+  chart
+    .append("text")
+    .text("80%")
+    .attr("x", chartWidth)
+    .attr("y", yAxisScale(24) + margins.top + 20)
+    .classed("alert-text", true);
+
+  chart
+    .append("text")
+    .text("100%")
+    .attr("x", chartWidth)
+    .attr("y", margins.top + 20)
+    .classed("danger-text", true);
 };

@@ -58,3 +58,11 @@ rect {
 .danger-line {
   stroke: rgba(217, 83, 79, 1);
 }
+
+.alert-text {
+  fill: rgba(240, 173, 78, 1);
+}
+
+.danger-text {
+  fill: rgba(217, 83, 79, 1);
+}
