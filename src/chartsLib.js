@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import * as _ from "lodash";
 
-export const renderQueuChart = data => {
+export const renderQueueChart = data => {
   const margins = { top: 20, right: 30, bottom: 20, left: 30 };
   const width = window.innerWidth * (window.innerWidth < 600 ? 0.9 : 0.6);
   const height = window.innerWidth * (window.innerWidth < 600 ? 1 : 0.3);
@@ -50,19 +50,19 @@ export const renderQueuChart = data => {
 
   chart
     .selectAll("rect")
-    .data(_.reverse(_.sortBy(data, d => d.daysOnQueu)))
+    .data(_.reverse(_.sortBy(data, d => d.daysOnQueue)))
     .enter()
     .append("rect")
-    .classed("danger", d => d.daysOnQueu >= 30)
-    .classed("alert", d => _.inRange(d.daysOnQueu, 24, 30))
+    .classed("danger", d => d.daysOnQueue >= 30)
+    .classed("alert", d => _.inRange(d.daysOnQueue, 24, 30))
     .attr("transform", `translate(${margins.left}, 0)`)
     .attr("x", (d, i) => (i + 1) * chartWidth / 10 - rectWidth / 2)
     .attr("y", d => {
-      return chartHeight - yScale(d.daysOnQueu);
+      return chartHeight - yScale(d.daysOnQueue);
     })
-    .attr("val", d => d.daysOnQueu)
+    .attr("val", d => d.daysOnQueue)
     .attr("width", rectWidth)
-    .attr("height", d => yScale(d.daysOnQueu));
+    .attr("height", d => yScale(d.daysOnQueue));
 
   chart
     .append("line")

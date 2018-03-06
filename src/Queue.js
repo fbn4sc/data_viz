@@ -1,65 +1,65 @@
 import React, { Component } from "react";
-import { renderQueuChart } from "./chartsLib";
+import { renderQueueChart } from "./chartsLib";
 import * as _ from "lodash";
 
-class Queu extends Component {
+class Queue extends Component {
   state = {
     data: [
       {
         company: "Ingersoll-Rand plc (Ireland)",
-        daysOnQueu: 3
+        daysOnQueue: 3
       },
       {
         company: "ALPS/Dorsey Wright Sector Momentum ETF",
-        daysOnQueu: 30
+        daysOnQueue: 30
       },
       {
         company: "Lindblad Expeditions Holdings Inc. ",
-        daysOnQueu: 22
+        daysOnQueue: 22
       },
       {
         company: "Zogenix, Inc.",
-        daysOnQueu: 6
+        daysOnQueue: 6
       },
       {
         company: "Kennedy-Wilson Holdings Inc.",
-        daysOnQueu: 25
+        daysOnQueue: 25
       },
       {
         company: "SunTrust Banks, Inc.",
-        daysOnQueu: 21
+        daysOnQueue: 21
       },
       {
         company: "First Trust RiverFront Dynamic Europe ETF",
-        daysOnQueu: 27
+        daysOnQueue: 27
       },
       {
         company: "Everest Re Group, Ltd.",
-        daysOnQueu: 35
+        daysOnQueue: 35
       },
       {
         company: "Resource Capital Corp.",
-        daysOnQueu: 7
+        daysOnQueue: 7
       },
       {
         company: "Cushing Renaissance Fund (The)",
-        daysOnQueu: 15
+        daysOnQueue: 15
       }
     ]
   };
 
   componentDidMount() {
-    renderQueuChart(this.state.data);
+    renderQueueChart(this.state.data);
   }
 
   render() {
     return (
       <div className="container">
-        <h1>Queu</h1>
+        <h1>Queue</h1>
         <div
           id="chart-container"
           className={`container ${
-            _.maxBy(this.state.data, d => d.daysOnQueu).daysOnQueu >= 30
+            _.maxBy(this.state.data, d => d.daysOnQueue).daysOnQueue >= 30
               ? "container-alert"
               : ""
           }`}
@@ -69,4 +69,4 @@ class Queu extends Component {
   }
 }
 
-export default Queu;
+export default Queue;
