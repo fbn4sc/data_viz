@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 export const renderQueuChart = data => {
   const margins = { top: 20, right: 30, bottom: 20, left: 30 };
-  const width = window.innerWidth * (window.innerWidth < 600 ? 1 : 0.6);
+  const width = window.innerWidth * (window.innerWidth < 600 ? 0.9 : 0.6);
   const height = window.innerWidth * (window.innerWidth < 600 ? 1 : 0.3);
   const chartWidth = width - margins.left - margins.right;
   const chartHeight = height - margins.top - margins.bottom;
