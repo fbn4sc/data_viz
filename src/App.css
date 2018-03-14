@@ -76,3 +76,15 @@ rect {
     background: white;
   }
 }
+
+.page-header {
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+}
+
+.page-header small {
+  color: #999;
+}

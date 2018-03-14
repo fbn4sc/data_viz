@@ -11,6 +11,15 @@ const apiClient = {
       .catch(err => {
         console.log(err);
       });
+  },
+
+  getCommits: email => {
+    return axiosInstance
+      .get(`/commits?email=${email}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
