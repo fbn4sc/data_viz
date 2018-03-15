@@ -96,3 +96,41 @@ export const renderQueueChart = data => {
     .attr("y", margins.top + 20)
     .classed("danger-text", true);
 };
+
+export const histogram = data => {
+  const svgContainer = d3.select("#chart");
+  const svgWidth = svgContainer.node().getBoundingClientRect().width;
+  const svgHeight = svgContainer.node().getBoundingClientRect().height;
+  const margins = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  svgContainer
+    .append("svg")
+    .attr("id", "svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+  const svg = d3.select("#svg");
+
+  const rectWidth = svgWidth / (data.length * 2);
+
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(data.map(d => d.length))])
+    .range([0, svgHeight - margins.bottom]);
+
+  console.log(d3.max(data.map(d => d.length)));
+  console.log(yScale(178));
+  console.log(data.length);
+
+  svg
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .style("fill", "white")
+    .style("stroke", "black")
+    .attr("x", (d, i) => i * (svgWidth / data.length) + rectWidth / 2)
+    .attr("y", d => svgHeight - yScale(d.length))
+    .attr("width", rectWidth)
+    .attr("height", d => yScale(d.length) || 1);
+};

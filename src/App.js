@@ -5,7 +5,7 @@ import Home from "./Home";
 import Queue from "./Queue";
 import Churn from "./Churn";
 import Developers from "./Developers";
-import DeveloperDetails from "./DeveloperDetails";
+import DeveloperStats from "./DeveloperStats";
 
 class App extends Component {
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
           <Route path="/queue" component={Queue} />
           <Route path="/churn" component={Churn} />
           <Route exact path="/developers" component={Developers} />
-          <Route path="/developers/:email" component={DeveloperDetails} />
+          <Route path="/developers/:email" component={DeveloperStats} />
         </div>
       </Router>
     );

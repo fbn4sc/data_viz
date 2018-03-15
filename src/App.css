@@ -20,10 +20,6 @@ body,
   margin: 5px;
 }
 
-svg {
-  border: 1px dashed lightgray;
-}
-
 rect {
   stroke-width: 2px;
   stroke: rgba(2, 117, 216, 1);
