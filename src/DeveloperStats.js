@@ -40,16 +40,6 @@ class DeveloperStats extends Component {
             <div id="chart" style={{ width: "100%", height: "200px" }} />
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 col-md-4 offset-md-4">
-            <p>chart</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-4 offset-md-4">
-            <p>chart</p>
-          </div>
-        </div>
       </div>
     );
   }

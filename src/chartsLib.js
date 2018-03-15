@@ -111,16 +111,30 @@ export const histogram = data => {
 
   const svg = d3.select("#svg");
 
-  const rectWidth = svgWidth / (data.length * 2);
+  const xAxisScale = d3
+    .scaleLinear()
+    .domain([0, data.length + 1])
+    .range([0, svgWidth - margins.left - margins.right]);
+  const xAxis = d3
+    .axisBottom(xAxisScale)
+    .ticks(data.length + 1)
+    .tickSizeOuter(0)
+    .tickValues(_.range(1, data.length + 1));
+
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr(
+      "transform",
+      `translate(${margins.right}, ${svgHeight - margins.bottom})`
+    );
 
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(data.map(d => d.length))])
-    .range([0, svgHeight - margins.bottom]);
+    .range([0, svgHeight - margins.bottom - margins.top]);
 
-  console.log(d3.max(data.map(d => d.length)));
-  console.log(yScale(178));
-  console.log(data.length);
+  const rectWidth = 20;
 
   svg
     .selectAll("rect")
@@ -129,8 +143,8 @@ export const histogram = data => {
     .append("rect")
     .style("fill", "white")
     .style("stroke", "black")
-    .attr("x", (d, i) => i * (svgWidth / data.length) + rectWidth / 2)
-    .attr("y", d => svgHeight - yScale(d.length))
+    .attr("x", (d, i) => xAxisScale(i + 1) + rectWidth / 2)
+    .attr("y", d => svgHeight - margins.bottom - yScale(d.length))
     .attr("width", rectWidth)
     .attr("height", d => yScale(d.length) || 1);
 };
