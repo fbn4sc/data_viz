@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import apiClient from "./apiClient";
 import * as _ from "lodash";
-import { histogram, renderQueueChart } from "./chartsLib";
+import { histogram, heatmap } from "./chartsLib";
 
 class DeveloperStats extends Component {
   state = { commits: [] };
@@ -22,7 +22,31 @@ class DeveloperStats extends Component {
         histogram(data);
       })
     );
+
+    heatmap("#heatmap-target", this.prepareForHeatMap(this.state.commits));
   }
+
+  componentDidUpdate() {
+    heatmap("#heatmap-target", this.prepareForHeatMap(this.state.commits));
+  }
+
+  prepareForHeatMap = data => {
+    const commitObjs = data.map(commit => ({
+      day: new Date(commit.commitDate).getDay(),
+      hour: new Date(commit.commitDate).getHours()
+    }));
+
+    const byDayAndHour = _.groupBy(
+      commitObjs,
+      cObj => `${cObj.day} ${cObj.hour}`
+    );
+
+    return _.keys(byDayAndHour).map(key => ({
+      day: key.split(" ")[0],
+      hour: key.split(" ")[1],
+      count: byDayAndHour[key].length
+    }));
+  };
 
   render() {
     return (
@@ -38,6 +62,14 @@ class DeveloperStats extends Component {
         <div className="row">
           <div className="col-12 col-md-4 offset-md-4">
             <div id="chart" style={{ width: "100%", height: "200px" }} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-4 offset-md-4">
+            <div
+              id="heatmap-target"
+              style={{ width: "100%", height: "200px" }}
+            />
           </div>
         </div>
       </div>

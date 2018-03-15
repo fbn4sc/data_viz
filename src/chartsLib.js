@@ -148,3 +148,31 @@ export const histogram = data => {
     .attr("width", rectWidth)
     .attr("height", d => yScale(d.length) || 1);
 };
+
+export const heatmap = (target, data) => {
+  d3.select("#heatmap").remove();
+
+  const margin = { top: 20, left: 20, bottom: 20, right: 20 };
+
+  const svgTarget = d3.select(target);
+
+  const svgWidth = svgTarget.node().getBoundingClientRect().width;
+  const svgHeight = svgTarget.node().getBoundingClientRect().height;
+
+  const svg = svgTarget
+    .append("svg")
+    .attr("id", "heatmap")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+  svg
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .attr("x", d => d.hour * 20)
+    .attr("y", d => d.day * 20)
+    .attr("width", 20)
+    .attr("height", 20);
+};
