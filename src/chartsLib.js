@@ -192,11 +192,22 @@ export const heatmap = (target, data) => {
   const rectWidth = (svgWidth - margin.right - margin.left) / 24;
   const rectHeight = (svgHeight - margin.top - margin.bottom) / 7;
 
+  const maxCount = data.length ? _.maxBy(data, d => d.count).count : 0;
+
+  const colorScale = d3
+    .scaleLinear()
+    .domain([0, maxCount])
+    .range(["#fff", "#239a3b"]);
+
+  console.log(colorScale(20));
+  console.log(maxCount);
+
   svg
     .selectAll("rect")
     .data(data)
     .enter()
     .append("rect")
+    .attr("fill", d => colorScale(d.count))
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .attr("x", d => d.hour * rectWidth)
     .attr("y", d => d.day * rectHeight)
