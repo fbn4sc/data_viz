@@ -165,6 +165,28 @@ export const heatmap = (target, data) => {
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
+  const rectWidth = (svgWidth - margin.right - margin.left) / 24;
+  const rectHeight = (svgHeight - margin.top - margin.bottom) / 7;
+
+  const maxCount = data.length ? _.maxBy(data, d => d.count).count : 0;
+
+  const colorScale = d3
+    .scaleLinear()
+    .domain([0, maxCount])
+    .range(["#fff", "#239a3b"]);
+
+  svg
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("fill", d => colorScale(d.count))
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .attr("x", d => d.hour * rectWidth)
+    .attr("y", d => d.day * rectHeight)
+    .attr("width", rectWidth)
+    .attr("height", rectHeight);
+
   const yAxisScale = d3
     .scaleLinear()
     .domain([0, 7])
@@ -189,28 +211,16 @@ export const heatmap = (target, data) => {
     .call(xAxis)
     .attr("transform", `translate(0,${margin.top})`);
 
-  const rectWidth = (svgWidth - margin.right - margin.left) / 24;
-  const rectHeight = (svgHeight - margin.top - margin.bottom) / 7;
-
-  const maxCount = data.length ? _.maxBy(data, d => d.count).count : 0;
-
-  const colorScale = d3
-    .scaleLinear()
-    .domain([0, maxCount])
-    .range(["#fff", "#239a3b"]);
-
-  console.log(colorScale(20));
-  console.log(maxCount);
-
   svg
-    .selectAll("rect")
-    .data(data)
+    .selectAll(".vertical-grid-line")
+    .data(_.range(0, 25))
     .enter()
-    .append("rect")
-    .attr("fill", d => colorScale(d.count))
-    .attr("transform", `translate(${margin.left},${margin.top})`)
-    .attr("x", d => d.hour * rectWidth)
-    .attr("y", d => d.day * rectHeight)
-    .attr("width", rectWidth)
-    .attr("height", rectHeight);
+    .append("line")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`)
+    .attr("class", "vertical-grid-line")
+    .attr("stroke", "black")
+    .attr("x1", (d, i) => i * rectWidth)
+    .attr("y1", 0)
+    .attr("x2", (d, i) => i * rectWidth)
+    .attr("y2", svgHeight - margin.bottom - margin.top);
 };
