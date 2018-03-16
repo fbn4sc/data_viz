@@ -173,7 +173,7 @@ export const heatmap = (target, data) => {
   const colorScale = d3
     .scaleLinear()
     .domain([0, maxCount])
-    .range(["#fff", "#239a3b"]);
+    .range(["#D4EBD9", "#239a3b"]);
 
   svg
     .selectAll("rect")
