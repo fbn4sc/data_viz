@@ -27,12 +27,12 @@ class Developers extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-4 offset-md-4">
+          <div className="col-12 col-sm-8 offset-sm-2">
             <h1 className="page-header">Developers</h1>
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-md-4 offset-md-4">
+          <div className="col-12 col-sm-8 offset-sm-2">
             <input
               type="text"
               placeholder="Search"
@@ -42,7 +42,7 @@ class Developers extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-md-4 offset-md-4">
+          <div className="col-12 col-sm-8 offset-sm-2">
             <ul style={{ listStyle: "none", padding: 0 }}>
               {this.state.developers
                 .filter(
