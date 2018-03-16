@@ -189,14 +189,17 @@ export const heatmap = (target, data) => {
     .call(xAxis)
     .attr("transform", `translate(0,${margin.top})`);
 
+  const rectWidth = (svgWidth - margin.right - margin.left) / 24;
+  const rectHeight = (svgHeight - margin.top - margin.bottom) / 7;
+
   svg
     .selectAll("rect")
     .data(data)
     .enter()
     .append("rect")
     .attr("transform", `translate(${margin.left},${margin.top})`)
-    .attr("x", d => d.hour * 20)
-    .attr("y", d => d.day * 20)
-    .attr("width", 20)
-    .attr("height", 20);
+    .attr("x", d => d.hour * rectWidth)
+    .attr("y", d => d.day * rectHeight)
+    .attr("width", rectWidth)
+    .attr("height", rectHeight);
 };

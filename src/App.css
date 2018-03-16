@@ -20,12 +20,6 @@ body,
   margin: 5px;
 }
 
-rect {
-  stroke-width: 2px;
-  stroke: rgba(2, 117, 216, 1);
-  fill: rgba(2, 117, 216, 0.4);
-}
-
 .danger {
   stroke: rgba(217, 83, 79, 1);
   fill: rgba(217, 83, 79, 0.4);
