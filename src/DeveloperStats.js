@@ -51,7 +51,7 @@ class DeveloperStats extends Component {
           <div className="col-12 col-sm-8 offset-sm-2">
             <div
               id="heatmap-target"
-              style={{ width: "100%", height: "200px" }}
+              style={{ width: "100%", height: "400px" }}
             />
           </div>
         </div>

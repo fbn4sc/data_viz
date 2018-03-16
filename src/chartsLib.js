@@ -165,6 +165,30 @@ export const heatmap = (target, data) => {
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
+  const yAxisScale = d3
+    .scaleLinear()
+    .domain([0, 7])
+    .range([margin.top, svgHeight - margin.bottom]);
+
+  const yAxis = d3.axisLeft(yAxisScale).ticks(7);
+
+  svg
+    .append("g")
+    .call(yAxis)
+    .attr("transform", `translate(${margin.left}, 0)`);
+
+  const xAxisScale = d3
+    .scaleLinear()
+    .domain([0, 24])
+    .range([margin.left, svgWidth - margin.right]);
+
+  const xAxis = d3.axisTop(xAxisScale).ticks(24);
+
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr("transform", `translate(0,${margin.top})`);
+
   svg
     .selectAll("rect")
     .data(data)
