@@ -152,7 +152,7 @@ export const histogram = data => {
 export const heatmap = (target, data) => {
   d3.select("#heatmap").remove();
 
-  const margin = { top: 20, left: 20, bottom: 20, right: 20 };
+  const margin = { top: 20, left: 30, bottom: 20, right: 20 };
 
   const svgTarget = d3.select(target);
 
@@ -192,19 +192,24 @@ export const heatmap = (target, data) => {
     .domain([0, 7])
     .range([margin.top, svgHeight - margin.bottom]);
 
-  const yAxis = d3.axisLeft(yAxisScale).ticks(7);
+  const yAxis = d3
+    .axisLeft(yAxisScale)
+    .ticks(7)
+    .tickFormat((d, i) => "S,M,T,W,T,F,S".split(",")[i]);
 
   svg
     .append("g")
     .call(yAxis)
-    .attr("transform", `translate(${margin.left}, 0)`);
+    .attr("transform", `translate(${margin.left}, 0)`)
+    .selectAll(".tick text")
+    .attr("transform", `translate(0, ${rectHeight / 2})`);
 
   const xAxisScale = d3
     .scaleLinear()
     .domain([0, 24])
     .range([margin.left, svgWidth - margin.right]);
 
-  const xAxis = d3.axisTop(xAxisScale).ticks(24);
+  const xAxis = d3.axisTop(xAxisScale).ticks(12);
 
   svg
     .append("g")
@@ -219,8 +224,23 @@ export const heatmap = (target, data) => {
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
     .attr("class", "vertical-grid-line")
     .attr("stroke", "black")
+    .attr("stroke-width", 0.2)
     .attr("x1", (d, i) => i * rectWidth)
     .attr("y1", 0)
     .attr("x2", (d, i) => i * rectWidth)
     .attr("y2", svgHeight - margin.bottom - margin.top);
+
+  svg
+    .selectAll(".horizontal-grid-line")
+    .data(_.range(0, 8))
+    .enter()
+    .append("line")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`)
+    .attr("class", "horizontal-grid-line")
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.2)
+    .attr("x1", 0)
+    .attr("y1", (d, i) => i * rectHeight)
+    .attr("x2", svgWidth - margin.right - margin.left)
+    .attr("y2", (d, i) => i * rectHeight);
 };
