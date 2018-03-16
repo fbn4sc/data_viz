@@ -49,12 +49,13 @@ export const renderQueueChart = data => {
   const rectWidth = width / 20;
 
   chart
-    .selectAll("rect")
+    .selectAll(".queue-bar")
     .data(_.reverse(_.sortBy(data, d => d.daysOnQueue)))
     .enter()
     .append("rect")
-    .classed("danger", d => d.daysOnQueue >= 30)
-    .classed("alert", d => _.inRange(d.daysOnQueue, 24, 30))
+    .attr("class", "queue-bar")
+    .classed("queue-bar-danger", d => d.daysOnQueue >= 30)
+    .classed("queue-bar-alert", d => _.inRange(d.daysOnQueue, 24, 30))
     .attr("transform", `translate(${margins.left}, 0)`)
     .attr("x", (d, i) => (i + 1) * chartWidth / 10 - rectWidth / 2)
     .attr("y", d => {

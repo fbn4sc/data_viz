@@ -20,12 +20,17 @@ body,
   margin: 5px;
 }
 
-.danger {
+.queue-bar {
+  stroke: rgba(0, 123, 255, 1);
+  fill: rgba(0, 123, 255, 0.4);
+}
+
+.queue-bar-danger {
   stroke: rgba(217, 83, 79, 1);
   fill: rgba(217, 83, 79, 0.4);
 }
 
-.alert {
+.queue-bar-alert {
   stroke: rgba(240, 173, 78, 1);
   fill: rgba(240, 173, 78, 0.4);
 }
